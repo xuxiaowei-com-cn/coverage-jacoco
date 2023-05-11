@@ -1,9 +1,8 @@
-package cn.com.xuxiaowei.configuration;
+package cn.com.xuxiaowei;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -19,7 +18,6 @@ import java.sql.SQLException;
  * @since 0.0.1
  */
 @Slf4j
-@Import(MySQLDataSourceTestConfiguration.class)
 @SpringBootTest
 class MySQLDatasourceTests {
 
