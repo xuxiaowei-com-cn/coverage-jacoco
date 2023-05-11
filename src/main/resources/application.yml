@@ -1,0 +1,86 @@
+#
+# 服务器
+#
+server:
+  # 端口
+  port: ${COVERAGE_JACOCO_PORT:7701}
+
+#
+# Spring 配置
+#
+spring:
+  application:
+    name: coverage-jacoco
+  # 数据库
+  datasource:
+    # 数据库 连接串
+    # url: jdbc:mysql://${COVERAGE_JACOCO_MYSQL_HOST:127.0.0.1:3306}/${COVERAGE_JACOCO_MYSQL_DATABASE:coverage_jacoco}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    # 数据库 连接串 - 测试环境使用
+    url: jdbc:p6spy:mysql://${COVERAGE_JACOCO_MYSQL_HOST:127.0.0.1:3306}/${COVERAGE_JACOCO_MYSQL_DATABASE:coverage_jacoco}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    # 数据库 用户名
+    username: ${COVERAGE_JACOCO_MYSQL_USERNAME:root}
+    # 数据库 密码
+    password: ${COVERAGE_JACOCO_MYSQL_PASSWORD:xuxiaowei.com.cn}
+    # 数据库 驱动名称
+    # driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+    # 数据库 驱动名称 - 测试环境使用
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    # 连接池
+    hikari:
+      # 最小空闲连接数
+      minimum-idle: 3
+      # 最大连接数
+      maximum-pool-size: 10
+
+#
+# 日志 配置
+#
+logging:
+  # 日志等级
+  level:
+    # 在微服务中，直接使用 `web: debug` 无效
+    # web: debug
+    org.springframework.web: debug
+    # 包：日志等级
+    cn.com.xuxiaowei: debug
+  # 日志文件
+  file:
+    # 文件名及路径
+    name: /logs/${spring.application.name}/${spring.application.name}.log
+    # 文件最大大小，单位: org.springframework.util.unit.DataSize
+    # 已废弃，推荐使用：logging.logback.rollingpolicy.max-file-size
+    # max-size: 20MB
+    # 日志保存天数
+    # 已废弃，推荐使用：logging.logback.rollingpolicy.max-history
+    # max-history: 365
+  logback:
+    rollingpolicy:
+      # 文件最大大小，单位: org.springframework.util.unit.DataSize
+      # 旧版使用：logging.file.max-size
+      max-file-size: 20MB
+      # 日志保存天数
+      # 旧版使用：logging.file.max-history
+      max-history: 365
+      # 压缩文件命名
+      # 后缀名中比原始配置添加了 `.log`，解压后方便打开看
+      # 旧版使用：logging.pattern.rolling-file-name
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz
+  # 格式
+  pattern:
+    # 压缩文件命名
+    # 后缀名中比原始配置添加了 `.log`，解压后方便打开看
+    # 已废弃，推荐使用：logging.logback.rollingpolicy.file-name-pattern
+    # rolling-file-name: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz"
+    # 控制台日志格式
+    # 默认值："%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    # 增加了：%X{NAME} %clr(:){faint} %X{IP} %clr(:){faint} %X{REQUEST_ID} %clr(:){faint}
+    # LOG_LEVEL_PATTERN：日志等级
+    # -%5p：宽度
+    # PID：线程
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %X{TENANT_ID} %clr(:){faint} %X{USERS_ID} %clr(:){faint} %X{NAME} %clr(:){faint} %X{IP} %clr(:){faint} %X{REQUEST_ID} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    # 日志文件格式
+    # 默认值："%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    # 增加了：%X{NAME} : %X{IP} : %X{REQUEST_ID} :
+    file: "%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %X{TENANT_ID} : %X{USERS_ID} : %X{NAME} : %X{IP} : %X{REQUEST_ID} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    # 日期时间格式
+    dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
