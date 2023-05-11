@@ -23,11 +23,12 @@ coverage:
   services:
     # 使用 MySQL service
     - mysql:8.0.32
-  script:
+  before_script:
     # 创建表结构
     - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
     # 插入数据
     - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/2-data.sql
+  script:
     # 仅打包：不运行测试
     - mvn clean package -DskipTests=true
     # 仅测试
