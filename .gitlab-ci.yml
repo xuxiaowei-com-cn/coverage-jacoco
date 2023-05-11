@@ -22,3 +22,4 @@ coverage:
   artifacts:
     paths:
       - target/site/jacoco/**
+  coverage: '/Code coverage: \d+\.\d+/'
