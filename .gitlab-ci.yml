@@ -14,12 +14,7 @@ coverage:
     - mvn test -DskipTests=false
     # 仅报告
     - mvn jacoco:report
-    - echo $CI_JOB_TOKEN
-    - echo $CI_API_V4_URL
-    - curl --request POST \
-      --form "token=$CI_JOB_TOKEN" \
-      --form "file=@target/site/jacoco/jacoco.xml" \
-      "$CI_API_V4_URL/projects/$CI_PROJECT_ID/coverage_reports"
+    - curl --request POST --url "$CI_API_V4_URL/projects/$CI_PROJECT_ID/coverage_reports" --form "token=$CI_JOB_TOKEN" --form "file=@target/site/jacoco/jacoco.xml"
   cache:
     key: "${CI_JOB_NAME}"
     paths:
