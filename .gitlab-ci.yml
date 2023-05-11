@@ -1,5 +1,6 @@
 stages:
   - package
+  - test
 
 coverage:
   variables:
@@ -22,4 +23,10 @@ coverage:
   artifacts:
     paths:
       - target/site/jacoco/**
+  coverage: '/Code coverage: \d+\.\d+/'
+
+test:
+  stage: test
+  script:
+    - mvn test
   coverage: '/Code coverage: \d+\.\d+/'
