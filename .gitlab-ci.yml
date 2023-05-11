@@ -1,0 +1,27 @@
+stages:
+  - package
+
+coverage:
+  variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  stage: package
+  image: maven:3.6.3-jdk-8
+  script:
+    # 仅打包：不运行测试
+    - mvn clean package -DskipTests=true
+    # 仅测试
+    - mvn test -DskipTests=false
+    # 仅报告
+    - mvn jacoco:report
+    - curl --request POST \
+      --form "token=$CI_JOB_TOKEN" \
+      --form "file=@target/site/jacoco/jacoco.xml" \
+      "$CI_API_V4_URL/projects/$CI_PROJECT_ID/coverage_reports"
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .m2/repository
+  artifacts:
+    paths:
+      - target/site/jacoco/**
