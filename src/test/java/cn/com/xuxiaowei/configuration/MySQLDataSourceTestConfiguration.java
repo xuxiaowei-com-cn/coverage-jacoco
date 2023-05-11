@@ -25,7 +25,7 @@ public class MySQLDataSourceTestConfiguration {
 
         String driverClassName = "com.p6spy.engine.spy.P6SpyDriver";
         String url = "jdbc:p6spy:mysql://mysql:3306/coverage_jacoco?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
-        String username = "root";
+        String username = "runner";
         String password = "xuxiaowei.com.cn";
 
         // 创建测试数据源

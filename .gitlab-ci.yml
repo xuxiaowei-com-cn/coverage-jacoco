@@ -10,8 +10,8 @@ coverage:
     # https://hub.docker.com/_/mysql/
     # 数据库名
     MYSQL_DATABASE: coverage_jacoco
-    # 数据库用户名
-    MYSQL_USER: root
+    # 数据库用户名（不能使用 root）
+    MYSQL_USER: runner
     # 数据库密码
     MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
   stage: package
