@@ -30,6 +30,8 @@ public class H2DataSourceTestConfiguration {
         EmbeddedDatabase dataSource = new EmbeddedDatabaseBuilder().generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
+                .addScript("sql/1-h2-table.sql")
+                .addScript("sql/2-h2-data.sql")
                 .build();
         // @formatter:on
 

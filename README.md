@@ -97,6 +97,12 @@
   </a>
 </div>
 
+## 项目功能
+
+1. 代码覆盖率
+2. H2 数据源测试
+3. MySQL service 数据源测试
+
 ## 批量添加远端仓库地址
 
 <details>
@@ -115,10 +121,17 @@ git remote add gitcode https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco.git
 git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/coverage-jacoco.git
 </details>
 
-## [极狐GitLab 流水线](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/-/pipelines)
+## 流水线
+
+### [极狐GitLab 流水线](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/-/pipelines)
 
 - [![pipeline status](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/pipeline.svg)](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 - [![coverage report](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/coverage.svg)](https://jihulab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
+
+### [GitLab 流水线](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/-/pipelines)
+
+- [![pipeline status](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/pipeline.svg)](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
+- [![coverage report](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/coverage.svg)](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 
 ## Stargazers over time
 
