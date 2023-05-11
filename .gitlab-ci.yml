@@ -20,7 +20,7 @@ coverage:
     COVERAGE_JACOCO_MYSQL_DATABASE: $MYSQL_DATABASE
   stage: package
   # 支持使用 mysql 命令（已安装 mysql-client）
-  image: xuxiaoweicomcn/maven-mysql-client:3.6.3-jdk-8
+  image: xuxiaoweicomcn/maven-mysql-client:3.8.7-openjdk-18
   # https://docs.gitlab.cn/jh/ci/services/
   services:
     # https://docs.gitlab.cn/jh/ci/services/mysql.html
