@@ -5,8 +5,20 @@ coverage:
   variables:
     MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
     MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+    # 创建 MySQL service 环境变量：
+    # https://docs.gitlab.cn/jh/ci/services/mysql.html
+    # https://hub.docker.com/_/mysql/
+    # 数据库名
+    MYSQL_DATABASE: coverage_jacoco
+    # 数据库用户名
+    MYSQL_USER: root
+    # 数据库密码
+    MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
   stage: package
   image: maven:3.6.3-jdk-8
+  services:
+    # 使用 MySQL service
+    - mysql:8.0.32
   script:
     # 仅打包：不运行测试
     - mvn clean package -DskipTests=true
