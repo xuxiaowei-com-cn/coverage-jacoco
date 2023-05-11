@@ -40,4 +40,24 @@ class MySQLDatasourceTests {
         }
     }
 
+    @Test
+    void selectUsers() {
+        try (Connection connection = dataSource.getConnection()) {
+            log.info(String.valueOf(connection));
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `users` WHERE username = 'xuxiaowei'");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                Boolean enabled = resultSet.getBoolean("enabled");
+                log.info("username：{}", username);
+                log.info("password：{}", password);
+                log.info("enabled：{}", enabled);
+            }
+        } catch (SQLException e) {
+            log.error("MySQL 数据库查询用户异常", e);
+            throw new RuntimeException(e);
+        }
+    }
+
 }
