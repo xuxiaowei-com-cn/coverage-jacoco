@@ -25,7 +25,7 @@ coverage:
     - mysql:8.0.32
   before_script:
     - echo "deb https://repo.mysql.com/apt/debian/ buster mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
-    - apt-get update -o Acquire::AllowInsecureRepositories=true && apt-get install -y -o Acquire::AllowInsecureRepositories=true mysql-client
+    - apt-get update -o Acquire::AllowInsecureRepositories=true && apt-get install -y --allow-unauthenticated mysql-client
     # 创建表结构
     - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
     # 插入数据
