@@ -82,6 +82,7 @@ jobs:
 
       - name: Build with Maven
         run: |
+          java --version
           mvn clean -e -U package source:jar javadoc:jar install -DskipTests
 
       # https://app.codecov.io/gh/xuxiaowei-com-cn/coverage-jacoco/new
