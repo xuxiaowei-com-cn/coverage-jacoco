@@ -60,6 +60,11 @@ jobs:
         run: |
           # MySQL 版本
           mysql --version
+          echo ${env.MYSQL_ROOT_PASSWORD}
+          echo ${env.COVERAGE_JACOCO_MYSQL_HOST}
+          echo ${env.COVERAGE_JACOCO_MYSQL_DATABASE}
+          # 查看 MySQL 状态
+          sudo systemctl status mysql.service
           # 启动 MySQL
           sudo systemctl start mysql.service
           # 创建表结构
