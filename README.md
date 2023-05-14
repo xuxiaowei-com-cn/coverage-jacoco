@@ -133,6 +133,11 @@ git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/coverage-jacoco.g
 - [![pipeline status](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/pipeline.svg)](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 - [![coverage report](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/badges/main/coverage.svg)](https://gitlab.com/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 
+### [GitCode 流水线](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/-/pipelines)
+
+- [![pipeline status](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/badges/main/pipeline.svg)](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
+- [![coverage report](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/badges/main/coverage.svg)](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
+
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/xuxiaowei-com-cn/coverage-jacoco.svg)](https://starchart.cc/xuxiaowei-com-cn/coverage-jacoco)
