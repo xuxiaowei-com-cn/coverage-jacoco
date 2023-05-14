@@ -24,15 +24,15 @@ jobs:
         java-version: [ 8, 11, 17 ]
         os: [ "ubuntu-latest" ]
 
-    container:
-      image: mysql:8.0.32
-      env:
-        # 创建 MySQL 环境变量：
-        # https://hub.docker.com/_/mysql/
-        # 数据库名
-        MYSQL_DATABASE: coverage_jacoco
-        # 数据库密码
-        MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
+    # container:
+    #   image: mysql:8.0.32
+    #   env:
+    #     # 创建 MySQL 环境变量：
+    #     # https://hub.docker.com/_/mysql/
+    #     # 数据库名
+    #     MYSQL_DATABASE: coverage_jacoco
+    #     # 数据库密码
+    #     MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
 
     steps:
       # 检出代码
