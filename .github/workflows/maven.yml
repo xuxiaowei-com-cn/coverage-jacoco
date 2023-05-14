@@ -24,10 +24,28 @@ jobs:
         java-version: [ 8, 11, 17 ]
         os: [ "ubuntu-latest" ]
 
+    container:
+      image: mysql:8.0.32
+      env:
+        # 创建 MySQL 环境变量：
+        # https://hub.docker.com/_/mysql/
+        # 数据库名
+        MYSQL_DATABASE: coverage_jacoco
+        # 数据库密码
+        MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
+      volumes:
+        - ./docs/sql:/docker-entrypoint-initdb.d
+
     steps:
       # 检出代码
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      # 启动 MySQL
+      - name: Start MySQL
+        run: |
+          service mysql start
+          mysql --version
 
       # 设置JDK版本
       - name: Set up JDK ${{ matrix.java-version }}
@@ -69,5 +87,6 @@ jobs:
         run: |
           mvn clean -e -U package source:jar javadoc:jar install -DskipTests
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+      # https://app.codecov.io/gh/xuxiaowei-com-cn/coverage-jacoco/new
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v3
