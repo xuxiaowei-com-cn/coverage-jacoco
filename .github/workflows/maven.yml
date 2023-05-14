@@ -33,8 +33,6 @@ jobs:
         MYSQL_DATABASE: coverage_jacoco
         # 数据库密码
         MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
-      volumes:
-        - ./docs/sql:/docker-entrypoint-initdb.d
 
     steps:
       # 检出代码
