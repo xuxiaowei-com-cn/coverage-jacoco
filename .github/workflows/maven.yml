@@ -52,7 +52,7 @@ jobs:
         shell: sh
         run: |
           echo "MYSQL_ROOT_PASSWORD=xuxiaowei.com.cn" >> $GITHUB_ENV
-          echo "COVERAGE_JACOCO_MYSQL_HOST=localhost" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_HOST=mysql" >> $GITHUB_ENV
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
       - name: Wait for MySQL
