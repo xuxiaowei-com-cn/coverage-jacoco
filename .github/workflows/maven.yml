@@ -67,14 +67,10 @@ jobs:
         run: |
           # MySQL 版本
           mysql --version
-          # 启动 MySQL
-          sudo systemctl start mysql.service
-          # 查看 MySQL 状态
-          systemctl status mysql.service && journalctl -xeu mysql.service
           # 创建表结构
-          mysql -u root -p${{ env.MYSQL_ROOT_PASSWORD }} --host=${{ env.COVERAGE_JACOCO_MYSQL_HOST }} ${{ env.COVERAGE_JACOCO_MYSQL_DATABASE }} < docs/sql/1-table.sql
+          mysql -u root -p ${{ env.MYSQL_ROOT_PASSWORD }} --host=${{ env.COVERAGE_JACOCO_MYSQL_HOST }} ${{ env.COVERAGE_JACOCO_MYSQL_DATABASE }} < docs/sql/1-table.sql
           # 插入数据
-          mysql -u root -p${{ env.MYSQL_ROOT_PASSWORD }} --host=${{ env.COVERAGE_JACOCO_MYSQL_HOST }} ${{ env.COVERAGE_JACOCO_MYSQL_DATABASE }} < docs/sql/2-data.sql
+          mysql -u root -p ${{ env.MYSQL_ROOT_PASSWORD }} --host=${{ env.COVERAGE_JACOCO_MYSQL_HOST }} ${{ env.COVERAGE_JACOCO_MYSQL_DATABASE }} < docs/sql/2-data.sql
 
       # 设置JDK版本
       - name: Set up JDK ${{ matrix.java-version }}
