@@ -57,6 +57,7 @@ jobs:
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
       - name: Wait for MySQL
+        if: matrix.java-version == 8
         run: |
           until docker exec $(docker ps -qf "ancestor=mysql:8.0.32") mysqladmin ping --silent; do
               echo 'Waiting for MySQL to be available...'
