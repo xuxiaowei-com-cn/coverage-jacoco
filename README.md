@@ -113,6 +113,7 @@
     - GitHub 流水线
         - CodeQL 扫描项目
         - 构建/测试 Maven 项目，生成代码覆盖率
+        - 机器人 dependabot 每日扫描依赖升级并创建响应的 PR 与测试
 - maven-mysql-client
     - GitLab 流水线
         - 使用基于 maven:3.6.3-jdk-8 镜像并预先安装 MySQL 客户端的镜像，无需每次流水线都安装 MySQL 客户端，其他与 `main`
