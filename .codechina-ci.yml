@@ -19,19 +19,14 @@ coverage:
     COVERAGE_JACOCO_MYSQL_PASSWORD: $MYSQL_ROOT_PASSWORD
     COVERAGE_JACOCO_MYSQL_DATABASE: $MYSQL_DATABASE
   stage: package
-  image: maven:3.6.3-jdk-8
+  # 支持使用 mysql 命令（已安装 mysql-client）
+  image: xuxiaoweicomcn/maven-mysql-client:3.8.7-openjdk-18
   # https://docs.gitlab.cn/jh/ci/services/
   services:
     # https://docs.gitlab.cn/jh/ci/services/mysql.html
     # 使用 MySQL service
     - mysql:8.0.32
   before_script:
-    # 添加 MySQL 源
-    - echo "deb https://repo.mysql.com/apt/debian/ buster mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
-    # 更新源
-    - apt-get update -o Acquire::AllowInsecureRepositories=true
-    # 安装 mysql-client
-    - apt-get install -y --allow-unauthenticated mysql-client
     # 创建表结构
     - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
     # 插入数据
