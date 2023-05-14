@@ -59,7 +59,7 @@ jobs:
           # MySQL 版本
           mysql --version
           # 启动 MySQL
-          systemctl start mysql.service
+          sudo systemctl start mysql.service
           # 创建表结构
           mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
           # 插入数据
