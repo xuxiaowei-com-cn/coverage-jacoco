@@ -125,4 +125,5 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: target/site/jacoco/index.html,target/site/jacoco/jacoco.xml
+          directory: ./target/site/jacoco/
+          files: '**.*'
