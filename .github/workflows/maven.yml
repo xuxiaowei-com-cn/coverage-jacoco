@@ -113,7 +113,14 @@ jobs:
 
       - name: Build with Maven
         run: |
+          # 仅打包：不运行测试
           mvn clean -e -U package source:jar javadoc:jar install -DskipTests
+          # 仅测试
+          mvn test -e -DskipTests=false
+          # 仅报告
+          mvn jacoco:report
+          # 查看报告
+          cat target/site/jacoco/index.html
 
       # https://app.codecov.io/gh/xuxiaowei-com-cn/coverage-jacoco/new
       # - name: Upload coverage reports to Codecov
