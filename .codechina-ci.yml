@@ -1,0 +1,56 @@
+stages:
+  - package
+
+coverage:
+  variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+    # 创建 MySQL service 环境变量：
+    # https://docs.gitlab.cn/jh/ci/services/mysql.html
+    # https://hub.docker.com/_/mysql/
+    # 数据库名
+    MYSQL_DATABASE: coverage_jacoco
+    # 数据库密码
+    MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
+    # 配置测试类使用的环境变量
+    # https://docs.gitlab.cn/jh/ci/services/mysql.html
+    COVERAGE_JACOCO_MYSQL_HOST: mysql
+    COVERAGE_JACOCO_MYSQL_USERNAME: root
+    COVERAGE_JACOCO_MYSQL_PASSWORD: $MYSQL_ROOT_PASSWORD
+    COVERAGE_JACOCO_MYSQL_DATABASE: $MYSQL_DATABASE
+  stage: package
+  image: maven:3.6.3-jdk-8
+  # https://docs.gitlab.cn/jh/ci/services/
+  services:
+    # https://docs.gitlab.cn/jh/ci/services/mysql.html
+    # 使用 MySQL service
+    - mysql:8.0.32
+  before_script:
+    # 添加 MySQL 源
+    - echo "deb https://repo.mysql.com/apt/debian/ buster mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
+    # 更新源
+    - apt-get update -o Acquire::AllowInsecureRepositories=true
+    # 安装 mysql-client
+    - apt-get install -y --allow-unauthenticated mysql-client
+    # 创建表结构
+    - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
+    # 插入数据
+    - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/2-data.sql
+  script:
+    # 仅打包：不运行测试
+    - mvn clean package -DskipTests=true
+    # 仅测试
+    - mvn test -e -DskipTests=false
+    # 仅报告
+    - mvn jacoco:report
+    # https://docs.gitlab.cn/jh/ci/yaml/#coverage
+    - cat target/site/jacoco/index.html
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .m2/repository
+  artifacts:
+    paths:
+      - target/site/jacoco/**
+  # https://docs.gitlab.cn/jh/ci/yaml/#coverage
+  coverage: '/Total.*?([0-9]{1,3})%/'
