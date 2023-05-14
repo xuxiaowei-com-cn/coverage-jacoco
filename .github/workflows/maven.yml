@@ -42,7 +42,6 @@ jobs:
       # 启动 MySQL
       - name: Start MySQL
         run: |
-          service mysql start
           mysql --version
 
       # 设置JDK版本
