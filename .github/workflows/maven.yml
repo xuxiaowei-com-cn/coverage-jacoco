@@ -26,7 +26,7 @@ jobs:
 
     # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idserviceshttps://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
     services:
-      db:
+      mysql:
         image: mysql:8.0.32
         env:
           # 创建 MySQL 环境变量：
@@ -50,7 +50,7 @@ jobs:
         shell: sh
         run: |
           echo "MYSQL_ROOT_PASSWORD=xuxiaowei.com.cn" >> $GITHUB_ENV
-          echo "COVERAGE_JACOCO_MYSQL_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_HOST=mysql" >> $GITHUB_ENV
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
       # 初始化 MySQL
@@ -58,6 +58,7 @@ jobs:
         run: |
           # MySQL 版本
           mysql --version
+          echo ${{ services.mysql.name }}
           # 创建表结构
           mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
           # 插入数据
