@@ -140,6 +140,12 @@ git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/coverage-jacoco.g
 - [![pipeline status](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/badges/main/pipeline.svg)](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 - [![coverage report](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/badges/main/coverage.svg)](https://gitcode.net/xuxiaowei-com-cn/coverage-jacoco/-/commits/main)
 
+### [GitHub 流水线](https://github.com/xuxiaowei-com-cn/coverage-jacoco/actions)
+
+- [![maven](https://github.com/xuxiaowei-com-cn/coverage-jacoco/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/xuxiaowei-com-cn/coverage-jacoco/actions/workflows/maven.yml)
+- [![CodeQL](https://github.com/xuxiaowei-com-cn/coverage-jacoco/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/xuxiaowei-com-cn/coverage-jacoco/actions/workflows/codeql.yml)
+- [![coverage report](https://codecov.io/gh/xuxiaowei-com-cn/coverage-jacoco/branch/main/graph/badge.svg)](https://github.com/xuxiaowei-com-cn/coverage-jacoco/commits/main)
+
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/xuxiaowei-com-cn/coverage-jacoco.svg)](https://starchart.cc/xuxiaowei-com-cn/coverage-jacoco)
