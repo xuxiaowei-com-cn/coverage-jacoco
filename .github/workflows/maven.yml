@@ -27,10 +27,7 @@ jobs:
     # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
     services:
       mysql:
-        name: mysql
         image: mysql:8.0.32
-        ports:
-          - 3306:3306
         env:
           # 创建 MySQL 环境变量：
           # https://hub.docker.com/_/mysql/
