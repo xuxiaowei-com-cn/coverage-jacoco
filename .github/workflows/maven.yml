@@ -50,7 +50,7 @@ jobs:
         shell: sh
         run: |
           echo "MYSQL_ROOT_PASSWORD=xuxiaowei.com.cn" >> $GITHUB_ENV
-          echo "COVERAGE_JACOCO_MYSQL_HOST=db" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_HOST=127.0.0.1" >> $GITHUB_ENV
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
       # 初始化 MySQL
