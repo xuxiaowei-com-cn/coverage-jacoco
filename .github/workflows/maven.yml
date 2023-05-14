@@ -61,9 +61,9 @@ jobs:
           # 启动 MySQL
           sudo systemctl start mysql.service
           # 创建表结构
-          mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
+          sudo mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
           # 插入数据
-          mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/2-data.sql
+          sudo mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/2-data.sql
 
       # 设置JDK版本
       - name: Set up JDK ${{ matrix.java-version }}
