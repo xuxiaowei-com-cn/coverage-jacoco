@@ -24,25 +24,44 @@ jobs:
         java-version: [ 8, 11, 17 ]
         os: [ "ubuntu-latest" ]
 
-    # container:
-    #   image: mysql:8.0.32
-    #   env:
-    #     # 创建 MySQL 环境变量：
-    #     # https://hub.docker.com/_/mysql/
-    #     # 数据库名
-    #     MYSQL_DATABASE: coverage_jacoco
-    #     # 数据库密码
-    #     MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
+    # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idserviceshttps://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idservices
+    services:
+      db:
+        image: mysql:8.0.32
+        env:
+          # 创建 MySQL 环境变量：
+          # https://hub.docker.com/_/mysql/
+          # 数据库名
+          MYSQL_DATABASE: coverage_jacoco
+          # 数据库密码
+          MYSQL_ROOT_PASSWORD: xuxiaowei.com.cn
 
     steps:
       # 检出代码
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 启动 MySQL
-      - name: Start MySQL
+      - name: RUN ENV
+        id: run
+        # bash, sh, cmd, powershell, pwsh
+        # shell 类型必须为 sh，否则：
+        # $GITHUB_ENV：仅支持 ubuntu、macos
+        # $env:GITHUB_ENV：仅支持 windows
+        shell: sh
         run: |
+          echo "MYSQL_ROOT_PASSWORD=xuxiaowei.com.cn" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_HOST=db" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
+
+      # 初始化 MySQL
+      - name: Init MySQL
+        run: |
+          # MySQL 版本
           mysql --version
+          # 创建表结构
+          - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
+          # 插入数据
+          - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/2-data.sql
 
       # 设置JDK版本
       - name: Set up JDK ${{ matrix.java-version }}
@@ -82,7 +101,6 @@ jobs:
 
       - name: Build with Maven
         run: |
-          java --version
           mvn clean -e -U package source:jar javadoc:jar install -DskipTests
 
       # https://app.codecov.io/gh/xuxiaowei-com-cn/coverage-jacoco/new
