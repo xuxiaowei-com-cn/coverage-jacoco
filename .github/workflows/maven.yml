@@ -57,6 +57,7 @@ jobs:
 
       - name: Wait for MySQL
         run: |
+          docker ps
           until docker exec $(docker ps -qf "ancestor=mysql:8.0.32") mysqladmin ping --silent; do
               echo 'Waiting for MySQL to be available...'
               sleep 1
