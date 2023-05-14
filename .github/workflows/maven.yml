@@ -65,6 +65,7 @@ jobs:
 
       # 初始化 MySQL
       - name: Init MySQL
+        if: matrix.java-version == 8
         run: |
           # MySQL 版本
           mysql --version
