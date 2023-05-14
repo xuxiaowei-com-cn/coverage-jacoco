@@ -55,15 +55,18 @@ jobs:
           echo "COVERAGE_JACOCO_MYSQL_HOST=localhost" >> $GITHUB_ENV
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
+      - name: Wait for MySQL
+        run: |
+          until docker exec $(docker ps -qf "ancestor=mysql:8.0.32") mysqladmin ping --silent; do
+              echo 'Waiting for MySQL to be available...'
+              sleep 1
+          done
+
       # 初始化 MySQL
       - name: Init MySQL
         run: |
           # MySQL 版本
           mysql --version
-          # 启动 MySQL
-          sudo systemctl start mysql.service
-          # 查看 MySQL 状态
-          systemctl status mysql.service && journalctl -xeu mysql.service
           # 创建表结构
           mysql -u root -p${{ env.MYSQL_ROOT_PASSWORD }} --host=${{ env.COVERAGE_JACOCO_MYSQL_HOST }} ${{ env.COVERAGE_JACOCO_MYSQL_DATABASE }} < docs/sql/1-table.sql
           # 插入数据
