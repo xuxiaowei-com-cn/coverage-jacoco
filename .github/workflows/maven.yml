@@ -51,17 +51,16 @@ jobs:
         # $env:GITHUB_ENV：仅支持 windows
         shell: sh
         run: |
+          docker ps
           echo "MYSQL_ROOT_PASSWORD=xuxiaowei.com.cn" >> $GITHUB_ENV
-          echo "COVERAGE_JACOCO_MYSQL_HOST=mysql" >> $GITHUB_ENV
+          echo "COVERAGE_JACOCO_MYSQL_HOST=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -qf 'ancestor=mysql:8.0.32')`" >> $GITHUB_ENV
           echo "COVERAGE_JACOCO_MYSQL_DATABASE=coverage_jacoco" >> $GITHUB_ENV
 
       - name: Wait for MySQL
         run: |
-          docker ps
-          docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -qf "ancestor=mysql:8.0.32")
           until docker exec $(docker ps -qf "ancestor=mysql:8.0.32") mysqladmin ping --silent; do
               echo 'Waiting for MySQL to be available...'
-              sleep 1
+              sleep 5
           done
 
       # 初始化 MySQL
