@@ -23,7 +23,7 @@ class StringRedisTemplateTests {
 
     @Test
     void string() {
-        String key = "string-key";
+        String key = "string:key";
         String value = UUID.randomUUID().toString();
         log.info("key：{}，value：{}", key, value);
         stringRedisTemplate.opsForValue().set(key, value);
