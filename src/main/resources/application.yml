@@ -36,6 +36,7 @@ spring:
     database: ${COVERAGE_JACOCO_REDIS_DATABASE:4}
     password: ${COVERAGE_JACOCO_REDIS_PASSWORD:xuxiaowei.com.cn}
     host: ${COVERAGE_JACOCO_REDIS_HOST:127.0.0.1}
+    port: ${COVERAGE_JACOCO_REDIS_PORT:6379}
 
 #
 # 日志 配置
