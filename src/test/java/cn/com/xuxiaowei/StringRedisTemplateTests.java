@@ -27,6 +27,7 @@ class StringRedisTemplateTests {
         String value = UUID.randomUUID().toString();
         log.info("key：{}，value：{}", key, value);
         stringRedisTemplate.opsForValue().set(key, value);
+        log.info("准备从 Redis 中取数据");
         String str = stringRedisTemplate.opsForValue().get(key);
         log.info("从Redis中获取 key：{} 的值是：{}", key, str);
     }
