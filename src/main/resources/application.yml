@@ -34,7 +34,6 @@ spring:
   # Redis 配置
   redis:
     database: ${COVERAGE_JACOCO_REDIS_DATABASE:4}
-    password: ${COVERAGE_JACOCO_REDIS_PASSWORD:xuxiaowei.com.cn}
     host: ${COVERAGE_JACOCO_REDIS_HOST:127.0.0.1}
 
 #

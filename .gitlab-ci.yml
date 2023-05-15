@@ -20,7 +20,6 @@ coverage:
     COVERAGE_JACOCO_MYSQL_DATABASE: $MYSQL_DATABASE
     # https://docs.gitlab.cn/jh/ci/services/redis.html
     COVERAGE_JACOCO_REDIS_HOST: redis
-    COVERAGE_JACOCO_REDIS_PASSWORD:
   stage: package
   # 支持使用 mysql 命令（已安装 mysql-client）
   image: xuxiaoweicomcn/maven-mysql-client:3.6.3-jdk-8
