@@ -18,13 +18,19 @@ coverage:
     COVERAGE_JACOCO_MYSQL_USERNAME: root
     COVERAGE_JACOCO_MYSQL_PASSWORD: $MYSQL_ROOT_PASSWORD
     COVERAGE_JACOCO_MYSQL_DATABASE: $MYSQL_DATABASE
+    # https://docs.gitlab.cn/jh/ci/services/redis.html
+    COVERAGE_JACOCO_REDIS_HOST: redis
   stage: package
   image: maven:3.6.3-jdk-8
   # https://docs.gitlab.cn/jh/ci/services/
   services:
     # https://docs.gitlab.cn/jh/ci/services/mysql.html
     # 使用 MySQL service
+    # https://hub.docker.com/_/mysql
     - mysql:8.0.32
+    # https://docs.gitlab.cn/jh/ci/services/redis.html
+    # https://hub.docker.com/_/redis
+    - redis:6.2.12
   before_script:
     # 添加 MySQL 源
     - echo "deb https://repo.mysql.com/apt/debian/ buster mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
