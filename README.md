@@ -102,8 +102,9 @@
 1. 代码覆盖率
 2. H2 数据源测试
 3. MySQL service 数据源测试
-4. 支持 GitLab 流水线测试
-5. 支持 GitHub 流水线测试
+4. Redis service 数据源测试
+5. 支持 GitLab 流水线测试
+6. 支持 GitHub 流水线测试
 
 ## 分支说明
 
