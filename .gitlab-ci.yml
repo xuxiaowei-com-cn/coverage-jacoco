@@ -31,7 +31,7 @@ coverage:
     - mysql:8.0.32
     # https://docs.gitlab.cn/jh/ci/services/redis.html
     # https://hub.docker.com/_/redis
-    - redis:7.0.11
+    - redis:6.2.12
   before_script:
     # 创建表结构
     - mysql -u root -p${MYSQL_ROOT_PASSWORD} --host=${COVERAGE_JACOCO_MYSQL_HOST} ${COVERAGE_JACOCO_MYSQL_DATABASE} < docs/sql/1-table.sql
